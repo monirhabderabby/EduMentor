@@ -1,11 +1,9 @@
 // packages
-import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
     return (
-        <div>
-            <UserButton afterSignOutUrl="/" />
-            <p>Welcome to Edu Mentor</p>
+        <div className="h-[calc(100vh-80px)] w-full flex justify-center items-center">
+            Wel come to the Edumentor
         </div>
     );
 }
