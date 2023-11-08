@@ -2,9 +2,7 @@
 
 // packages
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import * as z from "zod";
 
 // components
@@ -19,6 +17,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -44,8 +43,9 @@ const CreatePage = () => {
 
     // functions
     const onSubmit = async (values) => {
+        console.log(values);
         try {
-            const response = await axios.post("/api/course", values);
+            const response = await axios.post("/api/courses", values);
             router.push(`/teacher/courses/${response.data.id}`);
         } catch {
             toast.error("Something went wrong");
