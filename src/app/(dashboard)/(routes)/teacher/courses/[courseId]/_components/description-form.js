@@ -2,7 +2,10 @@
 
 // packages
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as z from "zod";
 
 // components
@@ -10,98 +13,110 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import axios from "axios";
-import Link from "next/link";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 // Form Schema
 const formSchema = z.object({
-    title: z.string().min(1, {
-        message: "Title is required",
+    description: z.string().min(1, {
+        message: "Description is required",
     }),
 });
 
-const CreatePage = () => {
+export const DescriptionForm = ({ initialData, courseId }) => {
+    // state
+    const [isEditing, setIsEditing] = useState(false);
+
     // hooks
     const router = useRouter();
     const form = useForm({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            title: "",
-        },
+        defaultValues: initialData,
     });
 
     // JS Variables
     const { isSubmitting, isValid } = form.formState;
 
     // functions
+    const toggleEdit = () => setIsEditing((current) => !current);
+
     const onSubmit = async (values) => {
         try {
-            const response = await axios.post("/api/courses", values);
-            router.push(`/teacher/courses/${response.data.id}`);
+            await axios.patch(`/api/courses/${courseId}`, values);
+            toast.success("Course Updated");
+            toggleEdit();
+            router.refresh();
         } catch {
             toast.error("Something went wrong");
         }
     };
 
     return (
-        <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-[calc(100vh-80px)] p-6">
-            <div>
-                <h1 className="text-2xl">Name your course</h1>
-                <p className="text-sm text-slate-600">
-                    What would you like to name your course? Don&apos;t worry,
-                    you can change this later.
+        <div className="mt-6 border bg-slate-100 rounded-md p-4">
+            <div className="font-medium flex items-center justify-between">
+                Course Description
+                <Button onClick={toggleEdit} variant="ghost">
+                    {isEditing ? (
+                        <>Cancel</>
+                    ) : (
+                        <>
+                            <Pencil className="h-4 w-4 mr-2" />
+                            Edit Description
+                        </>
+                    )}
+                </Button>
+            </div>
+
+            {!isEditing && (
+                <p
+                    className={cn(
+                        "text-sm mt-2",
+                        !initialData.description && "text-slate-500 italic"
+                    )}
+                >
+                    {initialData.description || "No Description"}
                 </p>
+            )}
+
+            {isEditing && (
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8 mt-8"
+                        className="space-y-4 mt-4"
                     >
                         <FormField
                             control={form.control}
-                            name="title"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Course title</FormLabel>
                                     <FormControl>
-                                        <Input
+                                        <Textarea
                                             disabled={isSubmitting}
-                                            placeholder="e.g. 'Advanced web development'"
+                                            placeholder="e.g. 'This course is about ...'"
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
-                                        What will you teach in this course?
-                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
                         <div className="flex items-center gap-x-2">
-                            <Link href="/">
-                                <Button type="button" variant="ghost">
-                                    Cancel
-                                </Button>
-                            </Link>
                             <Button
                                 type="submit"
                                 disabled={!isValid || isSubmitting}
                             >
-                                Continue
+                                Save
                             </Button>
                         </div>
                     </form>
                 </Form>
-            </div>
+            )}
         </div>
     );
 };
-
-export default CreatePage;
