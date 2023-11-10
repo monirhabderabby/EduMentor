@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { IconBadge } from "@/components/icon-badge";
 import db from "@/lib/db";
 import { DescriptionForm } from "./_components/description-form";
+import { ImageForm } from "./_components/image-form";
 import { TitleForm } from "./_components/title-form";
 
 const CourseIdPage = async ({ params }) => {
@@ -66,6 +67,7 @@ const CourseIdPage = async ({ params }) => {
                         initialData={course}
                         courseId={course.id}
                     />
+                    <ImageForm initialData={course} courseId={course.id} />
                 </div>
             </div>
         </div>
