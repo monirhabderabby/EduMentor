@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 // assets
 import { IconBadge } from "@/components/icon-badge";
 import db from "@/lib/db";
+import { CategoryForm } from "./_components/category-form";
 import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
 import { TitleForm } from "./_components/title-form";
@@ -19,10 +20,17 @@ const CourseIdPage = async ({ params }) => {
         return redirect("/");
     }
 
+    // fetching data from database
     const course = await db.course.findUnique({
         where: {
             id: params.courseId,
             userId,
+        },
+    });
+
+    const categories = await db.category.findMany({
+        orderBy: {
+            name: "asc",
         },
     });
 
@@ -68,6 +76,14 @@ const CourseIdPage = async ({ params }) => {
                         courseId={course.id}
                     />
                     <ImageForm initialData={course} courseId={course.id} />
+                    <CategoryForm
+                        initialData={course}
+                        courseId={course.id}
+                        options={categories.map((category) => ({
+                            label: category.name,
+                            value: category.id,
+                        }))}
+                    />
                 </div>
             </div>
         </div>
