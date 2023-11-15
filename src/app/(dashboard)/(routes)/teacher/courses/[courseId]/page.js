@@ -11,8 +11,11 @@ import { redirect } from "next/navigation";
 // assets
 import { IconBadge } from "@/components/icon-badge";
 import db from "@/lib/db";
+
+// components
 import { AttachmentForm } from "./_components/attachment-form";
 import { CategoryForm } from "./_components/category-form";
+import { ChaptersForm } from "./_components/chapters-form";
 import { DescriptionForm } from "./_components/description-form";
 import { ImageForm } from "./_components/image-form";
 import { PriceForm } from "./_components/price-form";
@@ -34,6 +37,11 @@ const CourseIdPage = async ({ params }) => {
             userId,
         },
         include: {
+            chapters: {
+                orderBy: {
+                    position: "asc",
+                },
+            },
             attachments: {
                 orderBy: {
                     createdAt: "desc",
@@ -59,6 +67,7 @@ const CourseIdPage = async ({ params }) => {
         course.imageUrl,
         course.price,
         course.categoryId,
+        course.chapters.some((chapter) => chapter.isPublished),
     ];
 
     const totalFields = requiredFields.length;
@@ -105,7 +114,10 @@ const CourseIdPage = async ({ params }) => {
                             <IconBadge icon={ListChecks} />
                             <h2 className="text-xl">Course Chapters</h2>
                         </div>
-                        <div>TODO: Chapters</div>
+                        <ChaptersForm
+                            initialData={course}
+                            courseId={course.id}
+                        />
                     </div>
                     <div>
                         <div className="flex items-center gap-x-2">
