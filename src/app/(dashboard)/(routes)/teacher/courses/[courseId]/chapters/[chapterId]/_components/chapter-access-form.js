@@ -36,7 +36,6 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            // "!!" --> will make the statement boolean. Or,we can use "Boolean()"
             isFree: !!initialData.isFree,
         },
     });
@@ -64,14 +63,14 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Chapter Access
+                Chapter access
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
                         <>Cancel</>
                     ) : (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Edit Access
+                            Edit access
                         </>
                     )}
                 </Button>
@@ -85,9 +84,10 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                     )}
                 >
                     {initialData.isFree ? (
-                        <>This chapter is free for preview.</>
+                        <>This chapter is free for preview</>
                     ) : (
-                        <>This chapter is not free.</>
+                        <>This chapter is not free</>
+
                     )}
                 </p>
             )}
@@ -112,7 +112,8 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                                     <div className="space-y-1 leading-none">
                                         <FormDescription>
                                             Check this box if you want to make
-                                            this chapter free for preview.
+                                            this chapter free for preview
+
                                         </FormDescription>
                                     </div>
                                 </FormItem>
@@ -120,8 +121,8 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                         />
                         <div className="flex items-center gap-x-2">
                             <Button
-                                type="submit"
                                 disabled={!isValid || isSubmitting}
+                                type="submit"
                             >
                                 Save
                             </Button>
