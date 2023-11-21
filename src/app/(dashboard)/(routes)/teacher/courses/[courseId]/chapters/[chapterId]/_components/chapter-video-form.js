@@ -1,6 +1,7 @@
 "use client";
 
 // packages
+import MuxPlayer from "@mux/mux-player-react";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -46,19 +47,19 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Chapter video
+                Chapter Video
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing && <>Cancel</>}
                     {!isEditing && !initialData.videoUrl && (
                         <>
                             <PlusCircle className="w-4 h-4 mr-2" />
-                            Add an video
+                            Add a video
                         </>
                     )}
                     {!isEditing && initialData.videoUrl && (
                         <>
                             <Pencil className="h-4 w-4 mr-2" />
-                            Edit video
+                            Edit Videos
                         </>
                     )}
                 </Button>
@@ -71,7 +72,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
                     </div>
                 ) : (
                     <div className="relative aspect-video mt-2">
-                        Video uploaded!
+                        <MuxPlayer
+                            playbackId={initialData?.muxData?.playbackId || ""}
+                        />
                     </div>
                 ))}
 
@@ -86,14 +89,14 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
                         }}
                     />
                     <div className="text-sx text-muted-foreground mt-4">
-                        Upload this chapter's video
+                        Upload this chapter&apos;s video
                     </div>
                 </div>
             )}
             {initialData.videoUrl && !isEditing && (
                 <div className="text-xs text-muted-foreground mt-2">
                     Videos can take a few minutes to process. Refresh the page
-                    if video does not appear
+                    if video does not appear.
                 </div>
             )}
         </div>
