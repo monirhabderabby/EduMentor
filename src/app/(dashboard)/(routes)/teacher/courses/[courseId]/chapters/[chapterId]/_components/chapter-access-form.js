@@ -87,6 +87,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                         <>This chapter is free for preview</>
                     ) : (
                         <>This chapter is not free</>
+
                     )}
                 </p>
             )}
@@ -112,6 +113,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                                         <FormDescription>
                                             Check this box if you want to make
                                             this chapter free for preview
+
                                         </FormDescription>
                                     </div>
                                 </FormItem>
