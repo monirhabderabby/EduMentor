@@ -50,6 +50,7 @@ export const ChapterDescriptionForm = ({
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values) => {
+        console.log(courseId, chapterId);
         try {
             await axios.patch(
                 `/api/courses/${courseId}/chapters/${chapterId}`,
