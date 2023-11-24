@@ -79,7 +79,7 @@ model Chapter {
   muxData     MuxData?
 
   courseId    String      @db.ObjectId
-  course      Course      @relation(fields: [courseId], references: [id])
+  course      Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   userProgress UserProgress[]
 
