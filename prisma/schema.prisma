@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+// Define your Course model
+model Course {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  title     String   @map("title")
+  description String? @map("description")
+  imageUrl   String? @map("imageUrl")
+  price     Float?   @map("price")
+  isPublished Boolean  @default(false)
+
+  categoryId String? @map("categoryId") @db.ObjectId // Add @db.ObjectId here
+
+  category   Category? @relation("CategoryCourses", fields: [categoryId], references: [id])
+
+  // Define the opposite relation field in Course for Attachment
+  attachments Attachment[] @relation("CourseAttachments")
+
+  chapters Chapter[]
+  purchase Purchase[]
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  // Define an index for categoryId
+  @@index([categoryId])
+
+  // Define a full-text index for title
+  @@index([title], name: "FullTextIndex")
+}
+
+// Define your Category model
+model Category {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId // Add @db.ObjectId here
+  name    String   @unique @map("name")
+  
+  // Define a relation to Course model
+  courses Course[] @relation("CategoryCourses")
+}
+
+// Define your Attachment model
+model Attachment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @map("name")
+  url      String   @map("url")
+
+  courseId String   @map("courseId") @db.ObjectId
+  course   Course   @relation("CourseAttachments", fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  // Define an index for courseId
+  @@index([courseId])
+}
+
+// Define chapter model
+model Chapter {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  videoUrl    String?
+  position    Int
+  isPublished Boolean     @default(false)
+  isFree      Boolean     @default(false)
+
+  muxData     MuxData?
+
+  courseId    String      @db.ObjectId
+  course      Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userProgress UserProgress[]
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([courseId])
+}
+
+
+// Define MuxData
+model MuxData {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  assetId    String
+  playbackId String?
+
+  chapterId  String   @unique @db.ObjectId
+  chapter    Chapter  @relation(fields: [chapterId], references: [id])
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+
+// Define UserProgress
+model UserProgress {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String
+  chapterId   String   @db.ObjectId
+  chapter     Chapter  @relation(fields: [chapterId], references: [id])
+
+  isCompleted Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
+}
+
+model Purchase {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String
+
+  courseId    String @db.ObjectId
+  course      Course @relation(fields: [courseId], references: [id], onDelete:Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique
+  stripeCustomerId String @unique
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
