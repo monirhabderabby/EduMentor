@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import { getAnalytics } from "../../../../../../actions/get-analytics";
 import Chart from "./_components/chart";
 import DataCard from "./_components/data-card";
