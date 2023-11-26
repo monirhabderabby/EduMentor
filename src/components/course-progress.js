@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Progress } from "./ui/progress";
 
 const colorByVariant = {
@@ -10,10 +11,10 @@ const sizeByVariant = {
     sm: "text-xs",
 };
 
-const CourseProgress = () => {
+const CourseProgress = ({ variant, value, size }) => {
     return (
-        <div>
-            <Progress className="h-2" value={value} variant={variant} />
+        <div className="w-full">
+            <Progress className="h-2 w-full" value={value} variant={variant} />
             <p
                 className={cn(
                     "font-medium mt-2 text-sky-700",
