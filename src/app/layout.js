@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { ToastProvider } from "@/components/providers/toaster-provider";
 
 // css
+import TopLoaderProvider from "@/components/providers/TopLoaderProvider";
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
                 <body className={inter.className}>
                     <ConfettiProvider />
                     <ToastProvider />
+                    <TopLoaderProvider />
                     {children}
                 </body>
             </html>
