@@ -7,8 +7,6 @@ import CourseSidebar from "./_components/course-sidebar";
 const Courselayout = async ({ children, params }) => {
     const { userId } = auth();
 
-    console.log("userID is", userId);
-
     if (!userId) {
         return redirect("/");
     }
