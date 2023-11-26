@@ -1,3 +1,4 @@
+import CourseProgress from "@/components/course-progress";
 import db from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import CourseSidebarItem from "./course-sidebar-item";
@@ -17,9 +18,16 @@ const CourseSidebar = async ({ course, progressCount }) => {
     });
     return (
         <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
-            <div className="h-[80px] flex flex-col justify-center items-center border-b">
+            <div className="py-8 flex flex-col justify-center items-center border-b">
                 <h1 className="font-semibold">{course.title}</h1>
-                {/* check purchase and add progress */}
+                {purchase && (
+                    <div className="mt-10 w-full px-8">
+                        <CourseProgress
+                            variant="success"
+                            value={progressCount}
+                        />
+                    </div>
+                )}
             </div>
             <div className="flex flex-col w-full">
                 {course.chapters.map((chapter) => (

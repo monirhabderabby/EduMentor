@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs";
 import { File } from "lucide-react";
 import { getChapter } from "../../../../../../../actions/get-chapter";
 import CourseEnrollButton from "./_components/course-enroll-button";
+import CourseProgressButton from "./_components/course-progress-button";
 import VideoPlayer from "./_components/video-player";
 
 const ChapterIdPage = async ({ params }) => {
@@ -68,12 +69,12 @@ const ChapterIdPage = async ({ params }) => {
                         </h2>
                         {purchase ? (
                             <>
-                                {/* <CourseProgressButton
-                                chapterId={params.chapterId}
-                                courseId={params.courseId}
-                                nextChapterId={nextChapter?.id}
-                                isCompleted={!!userProgress?.isCompleted}
-                            /> */}
+                                <CourseProgressButton
+                                    chapterId={params.chapterId}
+                                    courseId={params.courseId}
+                                    nextChapterId={nextChapter?.id}
+                                    isCompleted={!!userProgress?.isCompleted}
+                                />
                             </>
                         ) : (
                             <CourseEnrollButton

@@ -7,6 +7,8 @@ import CourseSidebar from "./_components/course-sidebar";
 const Courselayout = async ({ children, params }) => {
     const { userId } = auth();
 
+    console.log("userID is", userId);
+
     if (!userId) {
         return redirect("/");
     }
@@ -38,7 +40,7 @@ const Courselayout = async ({ children, params }) => {
         return redirect("/");
     }
 
-    const progressCount = await getProgress(userId, course.id);
+    const progressCount = await getProgress({ userId, courseId: course.id });
 
     return (
         <div className="h-full">
