@@ -67,12 +67,14 @@ const ChapterIdPage = async ({ params }) => {
                             {chapter.title}
                         </h2>
                         {purchase ? (
-                            <CourseProgressButton
+                            <>
+                                {/* <CourseProgressButton
                                 chapterId={params.chapterId}
                                 courseId={params.courseId}
                                 nextChapterId={nextChapter?.id}
                                 isCompleted={!!userProgress?.isCompleted}
-                            />
+                            /> */}
+                            </>
                         ) : (
                             <CourseEnrollButton
                                 courseId={params.courseId}
