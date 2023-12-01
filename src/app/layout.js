@@ -19,7 +19,7 @@ export const metadata = {
     keywords:
         "Online course marketplace, Buy and sell courses, E-learning platform, Educational marketplace, Digital learning hub, Student-friendly courses, Teacher-led education, Skill enhancement, Online education marketplace, Edumentor courses",
     openGraph: {
-        images: "https://res.cloudinary.com/dzlrpspps/image/upload/v1700748344/Portfolio%20Website/monir_hossain.png",
+        images: "https://res.cloudinary.com/dn2pqzag1/image/upload/v1701402467/Edumentor/djmhabmhtzc3oxb8n0jh.jpg",
     },
 };
 
