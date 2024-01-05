@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project EduMentor Readme
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Welcome to EduMentor, a Learning Management Platform developed by Monir Hosain and Mobashirul Islam for practice purposes. EduMentor is designed to provide a comprehensive learning experience, allowing users to create, update, and manage courses, upload attachments, images, and videos, and facilitate seamless transactions through Stripe payment integration. The platform includes dedicated dashboards for teachers and students, along with authentication for clerks.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js:** A React framework that enables server-side rendering and provides a powerful development experience.
+- **Tailwind CSS:** A utility-first CSS framework used for designing a responsive and clean user interface.
+- **Prisma:** A modern database toolkit that simplifies database access with a type-safe query builder.
+- **MongoDB:** A NoSQL database used for storing and managing data efficiently.
+- **Shadcn:** [Please provide a brief description or link to Shadcn as it is not a widely known technology as of my last knowledge update in January 2022.]
+- **Stripe:** An online payment processing platform used for secure and smooth transactions.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Course Management
+- **Create Course:** Users can create new courses, providing essential details and content.
+- **Update Course:** Ability to edit and update existing course information.
 
-## Learn More
+### Multimedia Uploads
+- **Attachment Upload:** Users can upload course-related attachments for additional resources.
+- **Image Upload:** Adding images to enhance the visual appeal and understanding of the course.
+- **Video Upload:** Integration for uploading educational videos for a richer learning experience.
 
-To learn more about Next.js, take a look at the following resources:
+### Payment Integration
+- **Stripe Payment:** Seamless integration with Stripe for secure and convenient course transactions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### User Dashboards
+- **Teacher Dashboard:** Teachers have a dedicated space to manage courses, view student progress, and more.
+- **Student Dashboard:** Students can access enrolled courses, track progress, and interact with course content.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Authentication
+- **Clerk Authentication:** Ensures secure access for clerks, managing administrative tasks.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you for using EduMentor! If you have any questions or encounter issues, feel free to reach out to [Your Name] or [Friend's Name]. Happy learning!
