@@ -1,4 +1,4 @@
-# Project EduMentor Readme
+# Project EduMentor
 
 ## Overview
 
