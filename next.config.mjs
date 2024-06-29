@@ -14,6 +14,9 @@ const nextConfig = {
         ? "http://localhost:3000"
         : "https://edu-mentor-lms.vercel.app",
   },
+  experimental: {
+    webpackBuildWorker: true,
+  },
 };
 
 export default withPlaiceholder(nextConfig);
