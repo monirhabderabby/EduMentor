@@ -13,7 +13,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL("https://acme.com"),
+  metadataBase: new URL("https://edu-mentor-lms.vercel.app"),
   title:
     "Edumentor - Your Gateway to Online Learning | Buy and Sell Courses Easily",
   description:
